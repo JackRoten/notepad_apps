@@ -15,15 +15,15 @@ public class SwingNotePad {
 
         // Create a JTextArea and make it editable
         JTextArea textArea = new JTextArea();
-        textArea.setEdiable(true);
+        textArea.setEditable(true);
 
         // Increase the font of textArea
         textArea.setFont(new Font("Arial", Font.PLAIN, 20));
 
         // Create a JScrollPane to add scrolling
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLL_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLL_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         //Create buttons for "New", "Open", "Save"
         JButton newButton = new JButton("New");
@@ -31,14 +31,14 @@ public class SwingNotePad {
         JButton saveButton = new JButton("Save");
 
         // Add action listener for button actions
-        newButton.addActionListenter(new ActionListener() {
+        newButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Create a new window
                 SwingNotePad newNotePad = new SwingNotePad();
             }
         });
 
-        openButton.addActionListenter(new ActionListener() {
+        openButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 filePath = FilePicker.open();
                 String fileText = FileReader.read(filePath);
@@ -48,7 +48,7 @@ public class SwingNotePad {
             }
         });
 
-        saveButton.addActionListenter(new ActionListener() {
+        saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (filePath.isEmpty()) {
                     // for preventing from unselected path problems
@@ -57,13 +57,18 @@ public class SwingNotePad {
                         strFolderPath = FolderPicker.open();
                     }
                     String strFileName = "";
-                    while (strFileName = null || strFileName.isEmpty()) {
+                    while (strFileName == null || strFileName.isEmpty()) {
                         strFileName = JOptionPane.showInputDialog(null, "Enter new file name:", "File Name?", JOptionPane.QUESTION_MESSAGE);
                     }
                     // joining the folder Path and file name
                     Path folderPath = Paths.get(strFolderPath);
                     Path fileName = Paths.get(strFileName);
-                    filePath
+                    filePath = folderPath.resolve(fileName).toString();
+                    saveButton.doClick();
+                } else {
+                    //converting the string to a list to save it
+                    FileWriter.write(filePath, Arrays.asList(textArea.getText().split("\n")));
+                    JOptionPane.showMessageDialog(frame, "File saved at: " + filePath);
                 }
             }
         });
@@ -88,9 +93,9 @@ public class SwingNotePad {
         // Set frame size
         frame.setSize(800, 600);
         // Set the default close operation
-        frame.setDefaultCloseOperation(JFrame(DISPOSE_ON_CLOSE));
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // set frame visable
-        frame.setVisable(true);
+        frame.setVisible(true);
     }
     public static void main(String[] args) {
         SwingNotePad notePad = new SwingNotePad();
