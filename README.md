@@ -11,14 +11,22 @@ The notepad app writen in Python
 To run make sure Python is installed on your machine
 
 ```
-$ python pynotes/main.py
+$ cd pynotes
+$ python main.py
 ```
 
 ---
 ### javanotes
-The notepad app writen in Java
-
-To run make sure Java is installed on you machine
+The notepad app writen in Java. To run make sure Java is installed on you machine:
+[Install Java](https://www.java.com/en/download/manual.jsp). Or install via terminal such as on Mac (with fish):
 ```
-$ javac 
+$ brew install openjdk
+$ fish_add_path /opt/homebrew/opt/openjdk/bin
+```
+
+Compile and open:
+```
+$ cd javanotes
+$ javac SwingNotePad.java # To Compile
+$ java SwingNotePad # To Open
 ```
