@@ -1,0 +1,20 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.util.List;
+
+public class FileReader {
+    public static String read(String filePath) {
+        String outputText = "";
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filePath));
+            outputText = lines.removeFirst();
+            fot (String line: lines) {
+                outputText = outputText + "\n" + line;
+            }
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+        return outputText;
+    }
+}
