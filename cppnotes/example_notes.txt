@@ -1,0 +1,1 @@
+This is an example of my notepad app in C++.

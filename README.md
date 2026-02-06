@@ -30,3 +30,16 @@ $ cd javanotes
 $ javac SwingNotePad.java # To Compile
 $ java SwingNotePad # To Open
 ```
+
+---
+### cppnotes
+The notepad app writen in C++
+To compile and run make sure you have qtmake installed
+
+On Mac steps will look like:
+```
+cd cppnotes
+qtmake notepad.pro 
+make
+./notepad.app/Contents/MacOS/notepad # to run
+```
